@@ -12,15 +12,15 @@ export default {
   methods: {
     searchTitle() {
       axios
-        .get(
-          "https://api.themoviedb.org/3/search/movie?api_key=5cf2112ddf23b3b71a19a74fcd05ae67&query=harry potter&language=it-IT"
-        )
+        .get(store.apiUri + store.movieTitle)
         .then((response) => {
-          const result = response.data;
+          store.results = response.data;
+          console.log(store.results);
           console.log(response.data);
-          console.log(response.data.respose);
+        })
+        .catch((error) => {
+          alert(error.message);
         });
-
       store.movieTitle = "";
     },
   },
@@ -29,26 +29,26 @@ export default {
 
 <template>
   <div class="container">
-    <form class="row g-3">
-      <div class="col-auto">
-        <input
-          v-model="store.movieTitle"
-          type="text"
-          class="form-control"
-          placeholder="Harry Potter"
-        />
-      </div>
-      <div class="col-auto">
-        <button
-          @click="searchTitle()"
-          @keyup.enter="searchTitle()"
-          type="submit"
-          class="btn btn-primary mb-3"
-        >
-          Search
-        </button>
-      </div>
-    </form>
+    <div class="col-auto">
+      <input
+        @keyup.enter="searchTitle()"
+        v-model="store.movieTitle"
+        type="text"
+        class="form-control"
+        placeholder="Harry Potter"
+      />
+    </div>
+    <div class="col-auto">
+      <button @click="searchTitle()" type="submit" class="btn btn-primary mb-3">
+        Search
+      </button>
+    </div>
+    <ol v-for="result in store.results.results">
+      <li>Titolo: {{ result.title }}</li>
+      <li>Titolo Originale: {{ result.original_title }}</li>
+      <li>Lingua: {{ result.original_language }}</li>
+      <li>Voto: {{ result.vote_average }}/10</li>
+    </ol>
   </div>
 </template>
 
