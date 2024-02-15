@@ -10,11 +10,11 @@ export default {
     };
   },
   methods: {
-    fetchTitle() {
+    fetchMovieTitle() {
       axios
         .get(store.apiUriMovies + store.movieTitle)
         .then((response) => {
-          store.results = response.data.results.map((result) => {
+          store.resultMovies = response.data.results.map((result) => {
             return {
               title: result.title,
               original_title: result.original_title,
@@ -27,73 +27,80 @@ export default {
         .catch((error) => {
           alert(error.message);
         });
-      store.movieTitle = "";
     },
-    searchMovieTitle() {
+    fetchTvSerieTitle() {
+      axios
+        .get(store.apiUriTvSeries + store.movieTitle)
+        .then((response) => {
+          store.resultTvSeries = response.data.results.map((result) => {
+            return {
+              title: result.name,
+              original_title: result.original_name,
+              language: result.original_language,
+              vote: result.vote_average,
+            };
+          });
+          console.log(response.data.results);
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    },
+    searchTitle() {
       if (store.movieTitle != "") {
-        this.fetchTitle();
+        this.fetchMovieTitle();
+        this.fetchTvSerieTitle();
       } else {
         alert(
           "ERRORE: per avviare la ricerca devi inserire almeno un carattere"
         );
       }
+      store.movieTitle = "";
     },
-    // searchTvSerieTitle() {
-    //   axios
-    //     .get(store.apiUriTvSeries + store.movieTitle)
-    //     .then((response) => {
-    //       store.results = response.data;
-    //       console.log(response.data);
-    //     })
-    //     .catch((error) => {
-    //       alert(error.message);
-    //     });
-    //   store.movieTitle = "";
-    // },
-    generateFlagImg(i) {
-      if (store.results[i].language == "ja") {
+    generateFlagImg(language) {
+      if (language == "ja") {
         return "/img/ja-flag.jpg";
       }
-      if (store.results[i].language == "en") {
+      if (language == "en") {
         return "/img/en-flag.jpg";
       }
-      if (store.results[i].language == "it") {
+      if (language == "it") {
         return "/img/it-flag.jpg";
       }
-      if (store.results[i].language == "fr") {
+      if (language == "fr") {
         return "/img/fr-flag.jpg";
       }
-      if (store.results[i].language == "de") {
+      if (language == "de") {
         return "/img/de-flag.jpg";
       }
-      if (store.results[i].language == "pt") {
+      if (language == "pt") {
         return "/img/pt-flag.jpg";
       }
-      if (store.results[i].language == "ru") {
+      if (language == "ru") {
         return "/img/ru-flag.jpg";
       }
-      if (store.results[i].language == "fi") {
+      if (language == "fi") {
         return "/img/fi-flag.jpg";
       }
-      if (store.results[i].language == "da") {
+      if (language == "da") {
         return "/img/da-flag.jpg";
       }
-      if (store.results[i].language == "sr") {
+      if (language == "sr") {
         return "/img/sr-flag.jpg";
       }
-      if (store.results[i].language == "ko") {
+      if (language == "ko") {
         return "/img/ko-flag.jpg";
       }
-      if (store.results[i].language == "hi") {
+      if (language == "hi") {
         return "/img/hi-flag.jpg";
       }
-      if (store.results[i].language == "bn") {
+      if (language == "bn") {
         return "/img/bn-flag.jpg";
       }
-      if (store.results[i].language == "no") {
+      if (language == "no") {
         return "/img/no-flag.jpg";
       }
-      if (store.results[i].language == "es") {
+      if (language == "es") {
         return "/img/es-flag.jpg";
       }
 
@@ -107,7 +114,7 @@ export default {
   <div class="container">
     <div class="col-auto">
       <input
-        @keyup.enter="searchMovieTitle()"
+        @keyup.enter="searchTitle()"
         v-model="store.movieTitle"
         type="text"
         class="form-control"
@@ -115,21 +122,30 @@ export default {
       />
     </div>
     <div class="col-auto">
-      <button
-        @click="searchMovieTitle()"
-        type="submit"
-        class="btn btn-primary mb-3"
-      >
+      <button @click="searchTitle()" type="submit" class="btn btn-primary mb-3">
         Search
       </button>
     </div>
-    <ol v-for="(result, index) in store.results">
+    <ol v-for="(result, index) in store.resultMovies">
       <li>Titolo: {{ result.title }}</li>
       <li>Titolo Originale: {{ result.original_title }}</li>
       <li>
         Lingua:
         <img
-          :src="generateFlagImg(index)"
+          :src="generateFlagImg(result.language)"
+          alt="flag image"
+          style="max-width: 30px"
+        />
+      </li>
+      <li>Voto: {{ result.vote }}/10</li>
+    </ol>
+    <ol v-for="(result, index) in store.resultTvSeries">
+      <li>Titolo: {{ result.title }}</li>
+      <li>Titolo Originale: {{ result.original_title }}</li>
+      <li>
+        Lingua:
+        <img
+          :src="generateFlagImg(result.language)"
           alt="flag image"
           style="max-width: 30px"
         />
