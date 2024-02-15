@@ -20,6 +20,7 @@ export default {
               original_title: result.original_title,
               language: result.original_language,
               vote: result.vote_average,
+              posterPath: result.poster_path,
             };
           });
           console.log(response.data.results);
@@ -38,6 +39,7 @@ export default {
               original_title: result.original_name,
               language: result.original_language,
               vote: result.vote_average,
+              posterPath: result.poster_path,
             };
           });
           console.log(response.data.results);
@@ -106,6 +108,12 @@ export default {
 
       return "/img/general-flag.jpg";
     },
+    buildImagePath(imageName) {
+      return new URL(
+        store.poster.posterUrl + store.poster.posterWidth + imageName,
+        import.meta.url
+      ).href;
+    },
   },
 };
 </script>
@@ -127,6 +135,7 @@ export default {
       </button>
     </div>
     <ol v-for="(result, index) in store.resultMovies">
+      <li><img :src="buildImagePath(result.posterPath)" alt="" /></li>
       <li>Titolo: {{ result.title }}</li>
       <li>Titolo Originale: {{ result.original_title }}</li>
       <li>

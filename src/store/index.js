@@ -8,4 +8,8 @@ export const store = reactive({
     "https://api.themoviedb.org/3/search/tv?api_key=5cf2112ddf23b3b71a19a74fcd05ae67&language=it-IT&query=",
   resultMovies: [],
   resultTvSeries: [],
+  poster: {
+    posterUrl: "https://image.tmdb.org/t/p/",
+    posterWidth: "w185/",
+  },
 });
