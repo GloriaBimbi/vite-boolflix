@@ -69,18 +69,15 @@ export default {
         return newUrl;
       }
     },
+  },
+  computed: {
     convertVote() {
-      const voteOn5 = this.card.vote / 2;
-      store.newVote = Math.ceil(voteOn5);
-      return store.newVote;
+      return (store.newVote = Math.ceil(this.card.vote / 2));
     },
   },
   props: {
     card: Object,
     index: Number,
-  },
-  created() {
-    this.convertVote();
   },
 };
 </script>
@@ -108,11 +105,10 @@ export default {
       Voto:
       <font-awesome-icon
         v-for="star in 5"
-        :icon="
-          star <= convertVote() ? 'fa-solid fa-star' : 'fa-regular fa-star'
-        "
+        :icon="star <= convertVote ? 'fa-solid fa-star' : 'fa-regular fa-star'"
       />
-      {{ convertVote() }}/5
+      {{ convertVote }}
+      /5
     </li>
   </ol>
 </template>
