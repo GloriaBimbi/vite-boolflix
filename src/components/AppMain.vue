@@ -22,6 +22,7 @@ export default {
               language: result.original_language,
               vote: result.vote_average,
               poster_path: result.poster_path,
+              id: result.id,
             };
           });
           console.log(response.data.results);
@@ -41,6 +42,7 @@ export default {
               language: result.original_language,
               vote: result.vote_average,
               poster_path: result.poster_path,
+              id: result.id,
             };
           });
           console.log(response.data.results);
@@ -85,11 +87,13 @@ export default {
       v-for="(card, index) in store.resultMovies"
       :card="card"
       :index="index"
+      :key="card.id"
     ></app-card>
     <app-card
       v-for="(card, index) in store.resultTvSeries"
       :card="card"
       :index="index"
+      :key="card.id"
     ></app-card>
   </div>
 </template>
