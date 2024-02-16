@@ -17,8 +17,9 @@ export default {
 
 <template>
   <app-header />
-  <app-main />
   <app-modal v-if="store.modal.show" />
+
+  <app-main />
 </template>
 
 <style lang="scss">

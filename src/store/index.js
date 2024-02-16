@@ -14,7 +14,7 @@ export const store = reactive({
   },
   newVote: null,
   modal: {
-    show: true,
+    show: false,
     srcPoster: "",
     scrBackdrop: "",
     title: "",
