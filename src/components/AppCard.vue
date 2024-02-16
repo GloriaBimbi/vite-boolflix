@@ -69,10 +69,22 @@ export default {
         return newUrl;
       }
     },
+    convertVote() {
+      const voteOn5 = this.card.vote / 2;
+      store.newVote = Math.ceil(voteOn5);
+      return store.newVote;
+    },
+    voteInStars() {
+      this.convertVote();
+      for (i = 0; i <= store.newVote; i++) {}
+    },
   },
   props: {
     card: Object,
     index: Number,
+  },
+  created() {
+    this.convertVote();
   },
 };
 </script>
@@ -81,7 +93,7 @@ export default {
   <ol>
     <li>
       <img
-        :src="buildImagePath(card.posterPath)"
+        :src="buildImagePath(card.poster_path)"
         alt="poster"
         style="width: 185px; height: 278px; object-fit: cover"
       />
@@ -96,7 +108,7 @@ export default {
         style="max-width: 30px"
       />
     </li>
-    <li>Voto: {{ card.vote }}/10</li>
+    <li>Voto: {{ convertVote() }}/5</li>
   </ol>
 </template>
 

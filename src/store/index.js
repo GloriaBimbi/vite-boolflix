@@ -12,4 +12,5 @@ export const store = reactive({
     posterUrl: "https://image.tmdb.org/t/p/",
     posterWidth: "w185/",
   },
+  newVote: null,
 });

@@ -21,7 +21,7 @@ export default {
               original_title: result.original_title,
               language: result.original_language,
               vote: result.vote_average,
-              posterPath: result.poster_path,
+              poster_path: result.poster_path,
             };
           });
           console.log(response.data.results);
@@ -40,7 +40,7 @@ export default {
               original_title: result.original_name,
               language: result.original_language,
               vote: result.vote_average,
-              posterPath: result.poster_path,
+              poster_path: result.poster_path,
             };
           });
           console.log(response.data.results);
