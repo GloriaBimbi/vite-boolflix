@@ -92,6 +92,10 @@ export default {
 <template>
   <ol>
     <li>
+      <font-awesome-icon icon="fa-solid fa-star" />
+      <font-awesome-icon icon="fa-regular fa-star" />
+    </li>
+    <li>
       <img
         :src="buildImagePath(card.poster_path)"
         alt="poster"
