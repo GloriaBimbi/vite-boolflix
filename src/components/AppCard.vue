@@ -74,10 +74,6 @@ export default {
       store.newVote = Math.ceil(voteOn5);
       return store.newVote;
     },
-    voteInStars() {
-      this.convertVote();
-      for (i = 0; i <= store.newVote; i++) {}
-    },
   },
   props: {
     card: Object,
@@ -91,10 +87,6 @@ export default {
 
 <template>
   <ol>
-    <li>
-      <font-awesome-icon icon="fa-solid fa-star" />
-      <font-awesome-icon icon="fa-regular fa-star" />
-    </li>
     <li>
       <img
         :src="buildImagePath(card.poster_path)"
@@ -112,7 +104,16 @@ export default {
         style="max-width: 30px"
       />
     </li>
-    <li>Voto: {{ convertVote() }}/5</li>
+    <li>
+      Voto:
+      <font-awesome-icon
+        v-for="star in 5"
+        :icon="
+          star <= convertVote() ? 'fa-solid fa-star' : 'fa-regular fa-star'
+        "
+      />
+      {{ convertVote() }}/5
+    </li>
   </ol>
 </template>
 
