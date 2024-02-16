@@ -1,6 +1,7 @@
 <script>
 import AppMain from "./components/AppMain.vue";
 import AppHeader from "./components/AppHeader.vue";
+import AppModal from "./components/AppModal.vue";
 
 import { store } from "./store/index";
 import axios from "axios";
@@ -10,13 +11,14 @@ export default {
       store,
     };
   },
-  components: { AppMain, AppHeader },
+  components: { AppMain, AppHeader, AppModal },
 };
 </script>
 
 <template>
-  <app-header></app-header>
-  <app-main></app-main>
+  <app-header />
+  <app-main />
+  <app-modal v-if="store.modal.show" />
 </template>
 
 <style lang="scss">

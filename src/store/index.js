@@ -10,7 +10,16 @@ export const store = reactive({
   resultTvSeries: [],
   poster: {
     posterUrl: "https://image.tmdb.org/t/p/",
-    posterWidth: "w185/",
+    posterWidth: "w154/",
   },
   newVote: null,
+  modal: {
+    show: true,
+    srcPoster: "",
+    scrBackdrop: "",
+    title: "",
+    originalTitle: "",
+    language: "",
+    vote: "",
+  },
 });

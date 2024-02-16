@@ -21,6 +21,7 @@ export default {
               vote: result.vote_average,
               poster_path: result.poster_path,
               id: result.id,
+              backdrop_path: result.backdrop_path,
             };
           });
           console.log(response.data.results);
@@ -41,6 +42,7 @@ export default {
               vote: result.vote_average,
               poster_path: result.poster_path,
               id: result.id,
+              backdrop_path: result.backdrop_path,
             };
           });
           console.log(response.data.results);

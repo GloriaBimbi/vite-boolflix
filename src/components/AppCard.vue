@@ -70,47 +70,24 @@ export default {
       }
     },
   },
-  computed: {
-    convertVote() {
-      return (store.newVote = Math.ceil(this.card.vote / 2));
-    },
-  },
+
   props: {
     card: Object,
     index: Number,
   },
+
+  emits: ["open-model"],
 };
 </script>
 
 <template>
-  <ol>
-    <li>
-      <img
-        :src="buildImagePath(card.poster_path)"
-        alt="poster"
-        style="width: 185px; height: 278px; object-fit: cover"
-      />
-    </li>
-    <li>Titolo: {{ card.title }}</li>
-    <li>Titolo Originale: {{ card.original_title }}</li>
-    <li>
-      Lingua:
-      <img
-        :src="generateFlagImg(card.language)"
-        alt="flag image"
-        style="max-width: 30px"
-      />
-    </li>
-    <li>
-      Voto:
-      <font-awesome-icon
-        v-for="star in 5"
-        :icon="star <= convertVote ? 'fa-solid fa-star' : 'fa-regular fa-star'"
-      />
-      {{ convertVote }}
-      /5
-    </li>
-  </ol>
+  <div class="card" @click="$emit('open-model', this.index)">
+    <img
+      :src="buildImagePath(card.poster_path)"
+      alt="poster"
+      style="width: 154px; height: 231px; object-fit: cover"
+    />
+  </div>
 </template>
 
 <style lang="scss" scoped></style>

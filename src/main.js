@@ -7,10 +7,11 @@ import {
   faStar as faStarSolid,
   faBell,
   faMagnifyingGlass,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 
-library.add(faStarSolid, faStarRegular, faBell, faMagnifyingGlass);
+library.add(faStarSolid, faStarRegular, faBell, faMagnifyingGlass, faX);
 
 const app = createApp(App);
 app.component("font-awesome-icon", FontAwesomeIcon);
