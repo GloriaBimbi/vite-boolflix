@@ -15,10 +15,8 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <app-header></app-header>
-    <app-main></app-main>
-  </div>
+  <app-header></app-header>
+  <app-main></app-main>
 </template>
 
 <style lang="scss">
