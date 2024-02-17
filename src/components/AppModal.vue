@@ -98,8 +98,8 @@ export default {
         </div>
         <div class="info">
           <ol class="info">
-            <li class="title">Titolo: {{ store.modal.title }}</li>
-            <li class="original-title">
+            <li class="title">{{ store.modal.title }}</li>
+            <li><li class="original-title">
               Titolo Originale: {{ store.modal.originalTitle }}
             </li>
             <li>
@@ -111,7 +111,6 @@ export default {
               />
             </li>
             <li class="vote">
-              Voto:
               <font-awesome-icon
                 v-for="star in 5"
                 :icon="
@@ -120,9 +119,8 @@ export default {
                     : 'fa-regular fa-star'
                 "
               />
-              {{ convertVote }}
-              /5
-            </li>
+            </li></li>
+            
           </ol>
         </div>
       </div>
@@ -150,12 +148,12 @@ export default {
     color: white;
     padding: 1rem;
     border-radius: 1rem;
-    border: 1px solid red;
     position: relative;
 
     @include align("both");
 
     .close-element {
+      font-size: 30px;
       position: absolute;
       top: 10px;
       right: 10px;
@@ -170,13 +168,16 @@ export default {
     .info {
       .title {
         color: rgb(86, 83, 83);
-        font-size: 20px;
+        font-size: 50px;
+        text-align: center;
+        margin-bottom: 50px;
       }
       .original-title {
         color: grey;
         font-size: 15px;
       }
       .vote {
+        margin-bottom: 10px;
       }
     }
   }

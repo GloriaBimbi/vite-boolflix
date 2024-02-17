@@ -44,5 +44,6 @@ export default {
 <style lang="scss" scoped>
 .card {
   border: 0;
+  flex-shrink: 0;
 }
 </style>

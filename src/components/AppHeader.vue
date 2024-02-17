@@ -24,6 +24,7 @@ export default {
               backdrop_path: result.backdrop_path,
             };
           });
+          store.resultMoviesCopy = store.resultMovies;
           console.log(response.data.results);
         })
         .catch((error) => {
@@ -45,6 +46,7 @@ export default {
               backdrop_path: result.backdrop_path,
             };
           });
+          store.resultTvSeries = store.resultTvSeries;
           console.log(response.data.results);
         })
         .catch((error) => {
@@ -62,6 +64,22 @@ export default {
       }
       store.movieTitle = "";
     },
+    showMoviesSection() {
+      store.showMovies = true;
+      console.log(store.showTvSeries);
+      store.showTvSeries = false;
+      console.log(store.showTvSeries);
+    },
+    showTvSeriesSection() {
+      store.showTvSeries = true;
+      console.log(store.showMovies);
+      store.showMovies = false;
+      console.log(store.showMovies);
+    },
+    showHomeSection() {
+      store.showTvSeries = true;
+      store.showMovies = true;
+    },
   },
 };
 </script>
@@ -71,9 +89,9 @@ export default {
     <div class="logo-section">
       <h1>BOOLFLIX</h1>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Serie Tv</a></li>
-        <li><a href="#">Film</a></li>
+        <li @click="showHomeSection()"><a href="#">Home</a></li>
+        <li @click="showTvSeriesSection()"><a href="#">Serie Tv</a></li>
+        <li @click="showMoviesSection()"><a href="#">Film</a></li>
         <li><a href="#">La mia lista</a></li>
       </ul>
     </div>
@@ -116,6 +134,7 @@ header {
       padding: 10px;
       line-height: 80px;
       cursor: pointer;
+      font-weight: bolder;
     }
     ul {
       @include align("both");

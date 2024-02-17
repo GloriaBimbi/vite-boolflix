@@ -49,20 +49,34 @@ export default {
 </script>
 <template>
   <main>
-    <app-card
-      v-for="(card, index) in store.resultMovies"
-      :card="card"
-      :index="index"
-      :key="card.id"
-      @open-model="handleModelOpeningForMovies"
-    />
-    <app-card
-      v-for="(card, index) in store.resultTvSeries"
-      :card="card"
-      :index="index"
-      :key="card.id"
-      @open-model="handleModelOpeningForTvSeries"
-    />
+    <div v-if="store.showMovies" class="section-movies">
+      <h2>FILM</h2>
+      <div class="slider">
+        <div class="card-element">
+          <app-card
+            v-for="(card, index) in store.resultMovies"
+            :card="card"
+            :index="index"
+            :key="card.id"
+            @open-model="handleModelOpeningForMovies"
+          />
+        </div>
+      </div>
+    </div>
+    <div v-if="store.showTvSeries" class="section-tv-series">
+      <h2>SERIE TV</h2>
+      <div class="slider">
+        <div class="card-element">
+          <app-card
+            v-for="(card, index) in store.resultTvSeries"
+            :card="card"
+            :index="index"
+            :key="card.id"
+            @open-model="handleModelOpeningForTvSeries"
+          />
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 <style lang="scss" scoped>
@@ -71,12 +85,43 @@ export default {
 main {
   height: calc(100vh - 80px);
   background-color: rgb(28, 27, 27);
-  padding: 10px;
+  padding: 17px;
   overflow: scroll;
+  display: flex;
+  flex-direction: column;
 
-  @include align("vertical");
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
+  h2 {
+    color: white;
+    font-size: 25px;
+    width: 150px;
+    padding-top: 20px;
+    align-self: flex-start;
+  }
+
+  .card-element {
+    @include align("vertical");
+    justify-content: space-between;
+    overflow: scroll;
+    gap: 10px;
+  }
+
+  .slider {
+    width: 80%;
+    height: 231px;
+    overflow: scroll;
+    position: relative;
+  }
+
+  .section-movies,
+  .section-tv-series {
+    @include align("vertical");
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .section-movies {
+    margin-bottom: 10px;
+  }
 }
 </style>
