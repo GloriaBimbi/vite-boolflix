@@ -65,16 +65,24 @@ export default {
       store.movieTitle = "";
     },
     showMoviesSection() {
+      store.showMyList = false;
       store.showMovies = true;
       store.showTvSeries = false;
     },
     showTvSeriesSection() {
+      store.showMyList = false;
       store.showTvSeries = true;
       store.showMovies = false;
     },
     showHomeSection() {
+      store.showMyList = false;
       store.showTvSeries = true;
       store.showMovies = true;
+    },
+    showMyListSection() {
+      store.showTvSeries = false;
+      store.showMovies = false;
+      store.showMyList = true;
     },
   },
 };
@@ -88,7 +96,7 @@ export default {
         <li @click="showHomeSection()"><a href="#">Home</a></li>
         <li @click="showTvSeriesSection()"><a href="#">Serie Tv</a></li>
         <li @click="showMoviesSection()"><a href="#">Film</a></li>
-        <li><a href="#">La mia lista</a></li>
+        <li @click="showMyListSection()"><a href="#">La mia lista</a></li>
       </ul>
     </div>
     <div class="search-bar">

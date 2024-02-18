@@ -11,11 +11,12 @@ export default {
 
   methods: {
     handleModelOpeningForMovies(productIndex) {
-      //salvo una costante che faccia riferimento al pordotto selezionato per evitare di riscriverlo tutte le volte
-      const selectedMovie = store.resultMovies[productIndex];
+      store.myMovieIndex = productIndex;
+      const selectedMovie = store.resultMovies[store.myMovieIndex];
+
       //controllo che l'indice esista e nel caso collego la modale cliccata con le sue chiavi nello store
       if (productIndex >= 0) {
-        console.log(productIndex);
+        productIndex = store.myItemIndex;
 
         store.modal.srcPoster = selectedMovie.poster_path;
         store.modal.scrBackdrop = selectedMovie.backdrop_path;
@@ -29,8 +30,9 @@ export default {
       }
     },
     handleModelOpeningForTvSeries(productIndex) {
-      //salvo una costante che faccia riferimento al pordotto selezionato per evitare di riscriverlo tutte le volte
-      const selectedTvSerie = store.resultTvSeries[productIndex];
+      store.myTvSerieIndex = productIndex;
+      const selectedTvSerie = store.resultTvSeries[store.myTvSerieIndex];
+
       //controllo che l'indice esista e nel caso collego la modale cliccata con le sue chiavi nello store
       if (productIndex >= 0) {
         store.modal.srcPoster = selectedTvSerie.poster_path;
@@ -79,6 +81,20 @@ export default {
         </div>
       </div>
     </div>
+    <div v-if="store.showMyList" class="section-tv-series">
+      <h2>LA MIA LISTA</h2>
+      <div class="slider">
+        <div class="card-element">
+          <app-card
+            v-for="(card, index) in store.myList"
+            :card="card"
+            :index="index"
+            :key="card.id"
+            @open-model="handleModelOpeningForTvSeries"
+          />
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 <style lang="scss" scoped>
@@ -95,14 +111,14 @@ main {
   h2 {
     color: white;
     font-size: 25px;
-    width: 150px;
+    width: 170px;
     padding-top: 20px;
     align-self: flex-start;
   }
 
   .card-element {
     @include align("vertical");
-    justify-content: space-between;
+    justify-content: flex-start;
     overflow: scroll;
     gap: 10px;
   }

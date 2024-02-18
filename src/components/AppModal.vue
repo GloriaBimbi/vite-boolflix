@@ -66,7 +66,16 @@ export default {
       return "/img/general-flag.jpg";
     },
     addToMyList(){
+      console.log(store.myMovieIndex );
+      if(store.myMovieIndex !== null){
+        store.myList.push(store.resultMovies[store.myMovieIndex]);
+        store.myMovieIndex = null;
+      } else {
+        store.myList.push(store.resultTvSeries[store.myTvSerieIndex]);
+        store.myTvSerieIndex = null;
+      }
       
+      this.closeModal();
     },
   },
   computed: {
@@ -109,7 +118,7 @@ export default {
               <li class="vote"><font-awesome-icon v-for="star in 5" :icon=" star <= convertVote ? 'fa-solid fa-star' : 'fa-regular fa-star' " /> </li>
             </li> 
             <li class="reproduction-options">
-              <div class="play">
+              <div @click="closeModal()" class="play">
                 <font-awesome-icon icon="fa-solid fa-play" class="icon" />
                 <h5>Riproduci</h5>
               </div>
@@ -214,6 +223,7 @@ export default {
             gap: 20px;
             padding: 8px 60px;
             border-radius: 8px;
+            cursor: pointer;
 
             .icon{
               font-size: 22px;
@@ -224,21 +234,21 @@ export default {
           }
 
           .play{
-              background-color: rgb(221, 219, 219);
-              color: rgb(35, 35, 35);
+            background-color: white;
+            color: black;
+            opacity: 80%;
 
               &:hover{
-                background-color: white;
-                color: black;
+                opacity: 100%;
               }
           }
           .add-to-my-list{
-              background-color: rgb(51, 51, 51);
-              color: rgb(145, 145, 145);
+            background-color: rgb(96, 96, 96);
+            color: white;
+            opacity: 70%;
 
               &:hover{
-                background-color: rgb(96, 96, 96);
-                color: white;
+                opacity: 100%;
               }
           }
         }
