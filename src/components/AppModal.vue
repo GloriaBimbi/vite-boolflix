@@ -66,7 +66,6 @@ export default {
       return "/img/general-flag.jpg";
     },
     addToMyList(){
-      console.log(store.myMovieIndex );
       if(store.myMovieIndex !== null && !store.myList.includes(store.resultMovies[store.myMovieIndex])){
         store.myList.push(store.resultMovies[store.myMovieIndex]);
         store.myMovieIndex = null;
@@ -122,7 +121,7 @@ export default {
                 <font-awesome-icon icon="fa-solid fa-play" class="icon" />
                 <h5>Riproduci</h5>
               </div>
-              <div @click="addToMyList()" class="add-to-my-list">
+              <div v-if="store.showAddToMyList == true" @click="addToMyList()" class="add-to-my-list">
                 <font-awesome-icon icon="fa-solid fa-plus" class="icon" />
                 <h5>La mia lista</h5>
               </div>

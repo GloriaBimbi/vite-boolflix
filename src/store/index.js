@@ -146,6 +146,7 @@ export const store = reactive({
   myList: [],
   myMovieIndex: null,
   myTvSerieIndex: null,
+  myItemIndex: null,
   poster: {
     posterUrl: "https://image.tmdb.org/t/p/",
     posterWidth: "w154/",
@@ -164,4 +165,5 @@ export const store = reactive({
   showMovies: true,
   showTvSeries: true,
   showMyList: false,
+  showAddToMyList: true,
 });

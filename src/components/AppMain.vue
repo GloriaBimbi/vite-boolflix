@@ -14,10 +14,14 @@ export default {
       store.myMovieIndex = productIndex;
       const selectedMovie = store.resultMovies[store.myMovieIndex];
 
+      if (store.myList.includes(selectedMovie)) {
+        store.showAddToMyList = false;
+      } else {
+        store.showAddToMyList = true;
+      }
+
       //controllo che l'indice esista e nel caso collego la modale cliccata con le sue chiavi nello store
       if (productIndex >= 0) {
-        productIndex = store.myItemIndex;
-
         store.modal.srcPoster = selectedMovie.poster_path;
         store.modal.scrBackdrop = selectedMovie.backdrop_path;
         store.modal.title = selectedMovie.title;
@@ -33,6 +37,12 @@ export default {
       store.myTvSerieIndex = productIndex;
       const selectedTvSerie = store.resultTvSeries[store.myTvSerieIndex];
 
+      if (store.myList.includes(selectedTvSerie)) {
+        store.showAddToMyList = false;
+      } else {
+        store.showAddToMyList = true;
+      }
+
       //controllo che l'indice esista e nel caso collego la modale cliccata con le sue chiavi nello store
       if (productIndex >= 0) {
         store.modal.srcPoster = selectedTvSerie.poster_path;
@@ -44,6 +54,34 @@ export default {
         store.modal.overview = selectedTvSerie.overview;
         //faccio in modo che cliccando su una card si apra la modale
         store.modal.show = true;
+      }
+    },
+    handleModelOpeningForMyList(productIndex) {
+      console.log(store.myList);
+      console.log(store.resultMovies[productIndex]);
+      console.log(store.resultTvSeries[productIndex]);
+      if (
+        store.myList.includes(store.resultMovies[productIndex]) ||
+        store.myList.includes(store.resultTvSeries[productIndex])
+      ) {
+        store.myItemIndex = productIndex;
+        const selectedItem = store.myList[store.myItemIndex];
+
+        //controllo che l'indice esista e nel caso collego la modale cliccata con le sue chiavi nello store
+        if (productIndex >= 0) {
+          store.modal.srcPoster = selectedItem.poster_path;
+          store.modal.scrBackdrop = selectedItem.backdrop_path;
+          store.modal.title = selectedItem.title;
+          store.modal.originalTitle = selectedItem.original_title;
+          store.modal.language = selectedItem.language;
+          store.modal.vote = selectedItem.vote;
+          store.modal.overview = selectedItem.overview;
+          store.showAddToMyList = false;
+          //faccio in modo che cliccando su una card si apra la modale
+          store.modal.show = true;
+        }
+      } else {
+        store.showAddToMyList = true;
       }
     },
   },
@@ -90,7 +128,7 @@ export default {
             :card="card"
             :index="index"
             :key="card.id"
-            @open-model="handleModelOpeningForTvSeries"
+            @open-model="handleModelOpeningForMyList"
           />
         </div>
       </div>
