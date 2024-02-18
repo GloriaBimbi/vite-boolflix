@@ -23,13 +23,14 @@ export default {
         store.modal.originalTitle = selectedMovie.original_title;
         store.modal.language = selectedMovie.language;
         store.modal.vote = selectedMovie.vote;
+        store.modal.overview = selectedMovie.overview;
         //faccio in modo che cliccando su una card si apra la modale
         store.modal.show = true;
       }
     },
     handleModelOpeningForTvSeries(productIndex) {
       //salvo una costante che faccia riferimento al pordotto selezionato per evitare di riscriverlo tutte le volte
-      const selectedTvSerie = store.resultMovies[productIndex];
+      const selectedTvSerie = store.resultTvSeries[productIndex];
       //controllo che l'indice esista e nel caso collego la modale cliccata con le sue chiavi nello store
       if (productIndex >= 0) {
         store.modal.srcPoster = selectedTvSerie.poster_path;
@@ -38,6 +39,7 @@ export default {
         store.modal.originalTitle = selectedTvSerie.original_title;
         store.modal.language = selectedTvSerie.language;
         store.modal.vote = selectedTvSerie.vote;
+        store.modal.overview = selectedTvSerie.overview;
         //faccio in modo che cliccando su una card si apra la modale
         store.modal.show = true;
       }

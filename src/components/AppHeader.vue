@@ -22,9 +22,9 @@ export default {
               poster_path: result.poster_path,
               id: result.id,
               backdrop_path: result.backdrop_path,
+              overview: result.overview,
             };
           });
-          store.resultMoviesCopy = store.resultMovies;
           console.log(response.data.results);
         })
         .catch((error) => {
@@ -44,9 +44,9 @@ export default {
               poster_path: result.poster_path,
               id: result.id,
               backdrop_path: result.backdrop_path,
+              overview: result.overview,
             };
           });
-          store.resultTvSeries = store.resultTvSeries;
           console.log(response.data.results);
         })
         .catch((error) => {
@@ -66,15 +66,11 @@ export default {
     },
     showMoviesSection() {
       store.showMovies = true;
-      console.log(store.showTvSeries);
       store.showTvSeries = false;
-      console.log(store.showTvSeries);
     },
     showTvSeriesSection() {
       store.showTvSeries = true;
-      console.log(store.showMovies);
       store.showMovies = false;
-      console.log(store.showMovies);
     },
     showHomeSection() {
       store.showTvSeries = true;

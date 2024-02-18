@@ -10,6 +10,8 @@ import {
   faX,
   faAngleRight,
   faAngleLeft,
+  faPlus,
+  faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 
@@ -20,7 +22,9 @@ library.add(
   faMagnifyingGlass,
   faX,
   faAngleRight,
-  faAngleLeft
+  faAngleLeft,
+  faPlus,
+  faPlay
 );
 
 const app = createApp(App);

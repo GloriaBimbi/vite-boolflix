@@ -65,6 +65,9 @@ export default {
 
       return "/img/general-flag.jpg";
     },
+    addToMyList(){
+      
+    },
   },
   computed: {
     convertVote() {
@@ -96,31 +99,25 @@ export default {
             alt="immagine della porduzione selezionata"
           />
         </div>
-        <div class="info">
+        <div class="info-container">
           <ol class="info">
             <li class="title">{{ store.modal.title }}</li>
-            <li><li class="original-title">
-              Titolo Originale: {{ store.modal.originalTitle }}
-            </li>
-            <li>
-              Lingua:
-              <img
-                :src="generateFlagImg(store.modal.language)"
-                alt="flag image"
-                style="max-width: 30px"
-              />
-            </li>
-            <li class="vote">
-              <font-awesome-icon
-                v-for="star in 5"
-                :icon="
-                  star <= convertVote
-                    ? 'fa-solid fa-star'
-                    : 'fa-regular fa-star'
-                "
-              />
-            </li></li>
-            
+            <li class="overview">{{ store.modal.overview }}</li>
+            <li class="secondary-info-container">
+              <li class="original-title">{{ store.modal.originalTitle }}</li>
+              <li class="language"><img :src="generateFlagImg(store.modal.language)" alt="flag image" style="max-width: 30px" /></li>
+              <li class="vote"><font-awesome-icon v-for="star in 5" :icon=" star <= convertVote ? 'fa-solid fa-star' : 'fa-regular fa-star' " /> </li>
+            </li> 
+            <li class="reproduction-options">
+              <div class="play">
+                <font-awesome-icon icon="fa-solid fa-play" class="icon" />
+                <h5>Riproduci</h5>
+              </div>
+              <div @click="addToMyList()" class="add-to-my-list">
+                <font-awesome-icon icon="fa-solid fa-plus" class="icon" />
+                <h5>La mia lista</h5>
+              </div>
+            </li>      
           </ol>
         </div>
       </div>
@@ -142,8 +139,8 @@ export default {
   z-index: 1;
 
   .my-modal {
-    width: 50%;
-    height: 70%;
+    padding: 30px;
+    width: 65%;
     background-color: rgb(20, 20, 20);
     color: white;
     padding: 1rem;
@@ -157,29 +154,98 @@ export default {
       position: absolute;
       top: 10px;
       right: 10px;
+      color: rgb(86, 83, 83);
+
     }
 
     .img-container {
+      width: 30%;
       @include align("both");
       gap: 5px;
       flex-direction: column;
     }
 
-    .info {
-      .title {
-        color: rgb(86, 83, 83);
-        font-size: 50px;
-        text-align: center;
-        margin-bottom: 50px;
-      }
-      .original-title {
-        color: grey;
-        font-size: 15px;
-      }
-      .vote {
-        margin-bottom: 10px;
+    .info-container{
+      width: 70%;
+
+      .info {
+        .title {
+          color: white;
+          font-size: 30px;
+          text-align: center;
+          margin-top: 30px;
+          margin-bottom: 40px;
+        }
+
+        .overview{
+          color: rgb(86, 83, 83);
+          max-height: 180px;
+          overflow: scroll;
+        }
+        .secondary-info-container{
+          margin-top: 40px;
+          @include align("both");
+          gap: 40px;
+          color: white;
+
+          .original-title {
+            font-size: 15px;
+          }
+          .language{
+          }
+          .vote {
+          }
+        }
+
+        .reproduction-options{
+          margin-top: 40px;
+          @include align("both");
+          gap: 40px;
+
+          h5{
+            text-align: center;
+            font-size: 15px;
+            margin: 0;
+          }
+
+          .play,
+          .add-to-my-list{
+            @include align("both");
+            gap: 20px;
+            padding: 8px 60px;
+            border-radius: 8px;
+
+            .icon{
+              font-size: 22px;
+
+            }
+
+
+          }
+
+          .play{
+              background-color: rgb(221, 219, 219);
+              color: rgb(35, 35, 35);
+
+              &:hover{
+                background-color: white;
+                color: black;
+              }
+          }
+          .add-to-my-list{
+              background-color: rgb(51, 51, 51);
+              color: rgb(145, 145, 145);
+
+              &:hover{
+                background-color: rgb(96, 96, 96);
+                color: white;
+              }
+          }
+        }
+          
       }
     }
+    
   }
 }
 </style>
