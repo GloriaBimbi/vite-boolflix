@@ -67,10 +67,10 @@ export default {
     },
     addToMyList(){
       console.log(store.myMovieIndex );
-      if(store.myMovieIndex !== null){
+      if(store.myMovieIndex !== null && !store.myList.includes(store.resultMovies[store.myMovieIndex])){
         store.myList.push(store.resultMovies[store.myMovieIndex]);
         store.myMovieIndex = null;
-      } else {
+      } else if(store.myTvSerieIndex !== null && !store.myList.includes(store.resultTvSeries[store.myTvSerieIndex])) {
         store.myList.push(store.resultTvSeries[store.myTvSerieIndex]);
         store.myTvSerieIndex = null;
       }
